@@ -1,0 +1,84 @@
+{% extends "quizes/base.html" %}
+{% load static %}
+
+{% block scripts %}
+    <script src="{% static 'quizes/main.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+Sarbee app
+{% endblock title %}
+
+{% block content %}
+
+<!-- Modal -->
+<div class="modal fade" id="quizStartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Start?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body-confirm"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        <button type="button" id="start-button" class="btn btn-success">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="spinner-grow text-primary" role="status">
+
+</div>
+<div class="spinner-grow text-secondary" role="status">
+
+</div>
+<div class="spinner-grow text-success" role="status">
+
+</div>
+<div class="spinner-grow text-danger" role="status">
+
+</div>
+<div class="spinner-grow text-warning" role="status">
+
+</div>
+<div class="spinner-grow text-info" role="status">
+
+</div>
+<div class="spinner-grow text-success" role="status">
+
+</div>
+<div class="spinner-grow text-dark" role="status">
+
+</div>
+
+<div class="h4">Welcome {{user.username}} to your weekly assesment test. Give your best Good luck!!</div>
+<hr>
+
+{% for obj in object_list %}
+    <button
+        class="btn btn-link modal-button"
+        data-pk="{{obj.pk}}"
+        data-quiz="{{obj.name}}"
+        data-questions="{{obj.number_of_questions}}"
+        data-difficulty="{{obj.difficulty}}"
+        data-time="{{obj.time}}"
+        data-pass = "{{obj.required_score_to_pass}}"
+        data-toggle="modal"
+        data-target="#quizStartModal">
+        {{obj.name}}
+    </button><br>
+
+{% endfor %}
+<br/>
+<br/>
+<div class="instruction" >
+<p text text-info><strong><i>INSTRUCTIONS:</i></strong> <br> Read your books very well before attempting the questions. The number of
+questions you are to attempt will be displayed to you as an alert click on the Yes button to begin
+the test. Be cautious of the time as when your time elapse the option you did not pick will be
+marked as zero. When you are done with your test click on the submit button. you should scroll down to see
+your result. The answer for each question will be displayed right next to it. Wishing you Goodluck...</p>
+    </div>
+{% endblock content %}
