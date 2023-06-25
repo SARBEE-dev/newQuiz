@@ -47,7 +47,8 @@ def quiz_data_view(request, pk):
 
 @login_required
 def save_quiz_view(request, pk):
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    #if request.is_ajax():
         questions = []
         data = request.POST
         data_ = dict(data.lists())
